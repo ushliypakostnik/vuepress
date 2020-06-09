@@ -21,12 +21,8 @@ module.exports = {
         // path: '/start/',
         children: [
           {
-            title: 'Препроцессоры',
+            title: 'Препроцессор',
             path: '/start/bad',
-          },
-          {
-            title: 'Абстракция',
-            path: '/start/abstract',
           },
         ]
       },
