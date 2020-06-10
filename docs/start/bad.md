@@ -332,7 +332,7 @@ $breackpoints['md-max'] = $breackpoints.lg - 1
 
 // Media
 //////////////////////////////////////////////////////
-// Breackpoins in @/stylus/utils/variables.styl
+// Breackpoints in @/stylus/utils/variables.styl
 
 $xs()
   @media only screen and (max-width $breackpoints.xs-max)
@@ -409,7 +409,7 @@ $container__sm = 700px;
 
 // Media
 //////////////////////////////////////////////////////
-// Breackpoins in @/stylus/utils/variables.styl
+// Breackpoints in @/stylus/utils/variables.styl
 
 $lg()
   @media only screen and (min-width $breackpoints.lg)
