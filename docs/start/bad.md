@@ -260,10 +260,10 @@ $colors['primary'] = $colors.mint
 @import "_stylebase";
 
 // App styles
-@import "./global/_fixes";
-@import "./global/_elements";
-@import "./global/_widgets";
-@import "./global/_layout";
+@import "./project/_fixes";
+@import "./project/_elements";
+@import "./project/_widgets";
+@import "./project/_layout";
 
 /* External libraries customization */
 @import "./libraries/_modal";
