@@ -16,15 +16,14 @@ module.exports = {
     ],
     sidebar: [
       {
-        title: `Азы`,
+        title: `Препроцессор`,
         collapsable: false,
-        // path: '/start/',
-        children: [
-          {
-            title: 'Препроцессор',
-            path: '/start/bad',
-          },
-        ]
+        path: '/start/',
+      },
+      {
+        title: `JavaScript для GUI`,
+        collapsable: false,
+        path: '/more/',
       },
     ],
   },
