@@ -1362,13 +1362,13 @@ $gutter: 32px;
 
 ```vue
 <template>
-...
+  ...
 </template>
 
 <script>
-export default {
-...
-};
+  export default {
+  ...
+  };
 </script>
 
 <style lang="scss" scoped> /* scoped-стили - только для этого компонента */
