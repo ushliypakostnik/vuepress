@@ -1162,19 +1162,23 @@ $colors__white: #ffffff;
 
 Если же речь идет о разметке конкретного отдельного вида [а не «модификации на уровне всего интерфейса»], правильно будет использовать стили этого конкретного вида:
 ```html
-<section id="view">
-    
-    <div>
-    
-      <div>
-      
-        <div class="component"></div>
-    
-      </div>
-    
-    </div>   
+<main role="main">
 
-</section>
+    <section id="view">
+        
+        <div>
+        
+          <div>
+          
+            <div class="component"></div>
+        
+          </div>
+        
+        </div>   
+    
+    </section>
+
+</main>
 ```
 ```scss
 // В @/scr/scss/components/views/_view.scss:
