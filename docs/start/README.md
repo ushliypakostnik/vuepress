@@ -664,7 +664,8 @@ p {
   margin-bottom: $gutter / 2;
   @include text($font-family__sans, $font-size--small, $font-weight__sans__regular);
 
-  // Можно применить адаптивную примесь чтобы изменить поведение более локально - только для этих элемента
+  // Можно применить адаптивную примесь чтобы изменить поведение более локально -
+  // только для этого элемента на определенном типоразмере
   @include mobile {
     @include text($font-family__sans, $font-size--small * 1.2, $font-weight__sans__regular;
   }
