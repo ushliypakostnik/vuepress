@@ -636,7 +636,7 @@ $font-size__coefficient--large--mobile: 2;
 
 @mixin text($font-family, $font-size, $font-weight) {
   @if $font-size == $font-size--large {
-    @include xs {
+    @include mobile {
       font-size: round($font-size--base * $font-size__coefficient--large--mobile); // 32px
       line-height: floor($line-height--computed * $font-size__coefficient--large--mobile);// 46px
     }
@@ -665,7 +665,7 @@ p {
   @include text($font-family__sans, $font-size--small, $font-weight__sans__regular);
 
   // Можно применить адаптивную примесь чтобы изменить поведение более локально - только для этих элемента
-  @include xs {
+  @include mobile {
     @include text($font-family__sans, $font-size--small * 1.2, $font-weight__sans__regular;
   }
 }
