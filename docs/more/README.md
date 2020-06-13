@@ -6,7 +6,7 @@
 
 ## Константы
 
-## ScreeHelper
+## ScreeтHelper
 
 ## Resize Me
 
