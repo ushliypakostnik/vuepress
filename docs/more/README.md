@@ -6,7 +6,7 @@
 
 ## Константы
 
-## ScreeтHelper
+## ScreenHelper
 
 ## Resize Me
 
