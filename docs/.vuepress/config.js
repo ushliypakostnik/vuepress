@@ -21,7 +21,7 @@ module.exports = {
         path: '/start/',
       },
       {
-        title: `JavaScript для GUI`,
+        title: `Препроцессор, JavaScript и фрейворки`,
         collapsable: false,
         path: '/more/',
       },
