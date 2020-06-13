@@ -21,7 +21,7 @@ module.exports = {
         path: '/start/',
       },
       {
-        title: `Препроцессор, JavaScript и фрейворки`,
+        title: `Препроцессор, JavaScript и фреймворки`,
         collapsable: false,
         path: '/more/',
       },
