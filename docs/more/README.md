@@ -527,7 +527,7 @@ export default Component;
 const ScreenHelper = (() => {
   // ... остальные методы
 
-  // Добавляем приватный метод для определения версии iOS:
+  // Добавляем метод для определения версии iOS:
   const getiOSversion = () => {
     if (/iP(hone|od|ad)/.test(navigator.platform)) {
       const v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
@@ -536,8 +536,8 @@ const ScreenHelper = (() => {
     return null;
   };
 
-  // А также метод который нам собственно и нужен,
-  // он использует первый:
+  // И метод который нам нужен,
+  // использующий первый:
   const isiOS = () => {
     if (getiOSversion()) return true;
     return false;
@@ -601,7 +601,7 @@ class Layout extends PureComponent {
         'test',
         null,
         // eslint-disable-next-line getter-return
-        Object.defineProperty({}, "passive", { get: function() { passiveSupported = true; } }));
+        Object.defineProperty({}, 'passive', { get: function() { passiveSupported = true; } }));
     } catch(err) {}
   
     // Добавляем обработчик на скролл:
