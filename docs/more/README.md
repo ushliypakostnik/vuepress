@@ -570,12 +570,12 @@ import ScreenHelper from '../../utils/_screen-helper';
 
 import '../../scss/components/layout/_layout.scss';
 
+import Header from './Header';
+
 // Ленивые роуты
 const Main = lazy(() => import('../../views/Main'));
 const View2 = lazy(() => import('../../views/View2'));
 const View3 = lazy(() => import('../../views/View3'));
-
-import Header from './Header';
 
 const Page404 = () => (
   <section className="page404">
