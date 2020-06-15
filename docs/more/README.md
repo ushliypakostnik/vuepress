@@ -198,9 +198,9 @@ export default {
 ```scss
 // В @/src/scss/_main.scss: 
 // App themes
-@import "./themes/_themes-content.scss";
-@import "./themes/_theme-dark.scss";
-@import "./themes/_theme-light.scss";
+@import "./themes/_themes__content";
+@import "./themes/_theme--dark";
+@import "./themes/_theme--light";
 ```
 
 Ну и делаем все дерзко и изящно:
@@ -211,7 +211,7 @@ export default {
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 
-%theme-dark {
+%theme--dark {
   $colors__background: #263340 !global;
   $colors__border: #131920 !global;
   ...
@@ -219,9 +219,9 @@ export default {
 
 .app {
   &--dark {
-    @extend %theme-dark !optional;
+    @extend %theme--dark !optional;
 
-    @include themes-content;
+    @include themes__content;
   }
 }
 ```
@@ -232,7 +232,7 @@ export default {
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 
-%theme-light {
+%theme--light {
   $colors__background: #fafafa !global;
   $colors__border: #c6dde5 !global;
   ...
@@ -240,9 +240,9 @@ export default {
 
 .app {
   &--light {
-    @extend %theme-light !optional;
+    @extend %theme--light !optional;
 
-    @include themes-content;
+    @include themes__content;
   }
 }
 ```
@@ -252,7 +252,7 @@ export default {
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 
-@mixin themes-content {
+@mixin themes__content {
   // Base
 
   input {
