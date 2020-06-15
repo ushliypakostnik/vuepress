@@ -519,7 +519,7 @@ class Component extends PureComponent {
 export default Component;
 ```
 
-Теперь предположим при тестировании верстки выяснилось что есть проблемы с iOS, которые необходимо фиксить. Нам нужно научить наш фронтенд отличать iOS - давайте посмотрим как можно расширять функционал модуля <code>ScreenHelper</code>:
+Теперь предположим при тестировании верстки выяснилось что есть проблемы с iOS, которые необходимо фиксить. Нам нужно научить наш фронтенд отличать iOS - давайте посмотрим как легко можно расширять функционал модуля <code>ScreenHelper</code>:
 
 ```javascript
 // В @/src/utils/screen-helper.js:
@@ -626,7 +626,7 @@ class Layout extends PureComponent {
 
   // Проверка скролла
   checkScroll = (scroll) => {
-    // Внимание <Header /> должен иметь атрибут id="header" !!!  
+    // Внимание - верхняя обертка в <Header /> должна иметь атрибут id="header" !!!  
     const header = document.getElementById(HEADER_CLASS);
 
     // Так как у нас одинаковые брекпоинты с препроцессором,
