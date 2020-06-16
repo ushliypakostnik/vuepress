@@ -835,7 +835,7 @@ $grids__gutter: 6%;
 ```scss
 // В @/src/scss/core/_grid.scss:
 
-// Old rubber Grid mixin on inline-blocks for degradation
+// Old rubber grid mixin on inline-blocks for degradation
 //////////////////////////////////////////////////////
 
 // Примесь для построения простой резиновой сетки
