@@ -719,7 +719,7 @@ export default Layout;
         return 0;
       })();
       if (ieVersion) {
-        location.href = './legacy.html';
+        location.href = './legacyIE.html';
       }
 
       if (/iP(hone|od|ad)/.test(navigator.platform)) {
