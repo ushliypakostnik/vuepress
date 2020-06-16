@@ -718,7 +718,7 @@ export default Layout;
         }
         return 0;
       })();
-      if (ieVersion) {
+      if (ieVersion && ieVersion < 11) {
         location.href = './legacyIE.html';
       }
 
