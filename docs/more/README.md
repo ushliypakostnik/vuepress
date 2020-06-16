@@ -419,7 +419,7 @@ export default View;
 }
 ```
 
-Для разметки конкретных конечных видов, вьюх, кажется вполне оправданным использовать уникальные идентефикаторы - по спецификации - то, что точно присутствует на странице в единственном экземпляре.
+Для разметки конкретных конечных видов, вьюх, кажется вполне оправданным использовать уникальные идентификаторы - по спецификации - то, что точно присутствует на странице в единственном экземпляре.
 
 ### Утилитарные модули
 
@@ -433,6 +433,12 @@ import { DESIGN } from '@/utils/constants';
 const ScreenHelper = (() => {
   /* eslint-disable no-unused-vars */
   const NAME = 'ScreenHelper';
+
+  // Брекпоинты и типоразмеры.
+  // Конфигурируем "ручками" глобальные качества обслуживаемого дизайна:
+  // нам неободимо выразить брекпоинты через типоразмеры-сравнения с window.matchMedia().
+  // Можно добавлять точки и диапазоны с ними по необходимости,
+  // но стандартно и утилитарно для всего интерфейса:
 
   const TABLET = DESIGN.BREAKPOINTS.tablet;
   const DESKTOP = DESIGN.BREAKPOINTS.desktop;
@@ -448,6 +454,8 @@ const ScreenHelper = (() => {
   const isDesktop = () => {
     return window.matchMedia(`(min-width: ${DESKTOP}px)`).matches;
   };
+
+  // Еще полезные методы для адаптивности, доступности и работы с экраном:
 
   const getOrientation = () => {
     if (window.matchMedia('(orientation: portrait)').matches) {
@@ -485,9 +493,10 @@ const ScreenHelper = (() => {
 export default ScreenHelper;
 ```
 
-Обратите внимание - десктопные браузеры имеют разную ширину основного скроллбара - от нулевой прозрачной, до, возможно, даже некой специфической, кастомизированной через CSS для webkit. Поэтому если вашему javascript потребуется сравнить значение <code>document.documentElement.clientWidth</code> со специфическим нестандартным брекпоинтом которого нет в константах, и, следовательно, который не представлен в адаптивных функциях-сравнениях <code>window.matchMedia()</code> в <code>ScreenHelper</code>, случай очень частный и вы не хотите добавлять точку - скрипт будет ошибаться на ненулевую ширину в части просмотрщиков. В таких случаях необходимо использовать уточняющую логику:
+Обратите внимание: десктопные браузеры имеют разную ширину основного скроллбара - от нулевой прозрачной, до, возможно, даже некой специфической, кастомизированной через CSS для webkit. Поэтому если вашему javascript потребуется сравнить значение <code>document.documentElement.clientWidth</code> со специфическим нестандартным брекпоинтом которого нет в константах, и, следовательно, который не представлен в адаптивных функциях-сравнениях через <code>window.matchMedia()</code> в <code>ScreenHelper</code> - случай очень частный, исключительный и вы не хотите добавлять точку ради одного «фикса» - скрипт будет ошибаться на ненулевую ширину в части просмотрщиков. В таких случаях необходимо использовать уточняющую логику:
 
 ```javascript
+// Специфический брекпоинт
 const BREAKPOINT = 1234;
 
 if (document.documentElement.clientWidth < BREAKPOINT - ScreenHelper.getScrollbarWidth()) {
@@ -671,6 +680,261 @@ export default Layout;
 ```
 
 ## Деградация
+
+Многим наверняка приходилось слышать о прогрессивных деградации и улучшении. Вы могли встретиться с этими темами в «~~билетах~~вопросах к собеседованиям на фронтенд-разработчика» или в содержании программ «курсов по верстке». В реальности, конечно же, все немного не так как рассказывают мотивированные коучи ~~и инфоцыгане~~. В боевой ситуации большинство будет выбирать некий однозначный общий подход, синтаксис, адекватный озвученным заказчиком требованиям к доступности интерфейса, и ему следовать. Сегодня вы можете в общем и целом писать достаточно современный кроссбраузерный код для всех последних версий modern-браузеров используя только то, что «все уже хорошо умеют». Но если вам попался заказчик-параноик, в статистике заходов у которого все-таки еще встречаются исчезающе мизерные доли «владельцев Ослов» и он желает их обслужить - _у вас, конечно, проблемы_. Всегда, кстати, стоит попробовать побороться за качество своей жизни на работе и технологический прогресс заодно, объяснив что поддержка безнадежно устаревших сред это, в любом случае, дополнительные трудозатраты на разработку. Этот аргумент иногда отлично срабатывает. 
+
+Но как бы там ни было, мы обязаны постараться аккуратно исключить позорную ситуацию когда некий «владелец Осла», ~~приковыляет~~зайдет на ваш сайт и вместо шикарного современного адаптивного дизайна увидет _хрен знает что_. Так может быть и c OS ранних версий, кстати. Или, если вы вынуждены обслуживать некоторые самые поздние версии IE, вам все равно необходимо закрыть более ранние. Давайте предотвратим некорректное отображение приложения в технологически устаревших средах с помощью аккуратной заглушки вежливо предлагающей пользователю «скачать уже себе нормальный бро»/«купить нормальное устройство». Если вы работаете с реактивным фреймворком для этого придется отвлечься от «сорцов» и занятся папкой <code>@/public</code> в которой находятся статические ресурсы для сборки. Добавим страницы заглушек рядом с основным шаблоном вашего приложения <code>@/public/index.html</code>:
+
+```
+.
+└─ public
+   ├─ index.html
+   ├─ legacyIE.html
+   ├─ legacyIOS.html
+   └─ ...
+```
+
+Добавляем скрипт в раздел <code>\<head></code> файла <code>@/public/index.html</code>, сразу после заголовочных тагов: 
+
+```html
+<!-- В @/public/index.html: -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Site title</title>
+    <meta name="description" content="Site description" />
+
+    <script>
+      var ieVersion = (function() {
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf('MSIE');
+        if (msie > 0) {
+          return parseInt (ua.substring(msie + 5, ua.indexOf('.', msie)));
+        }
+        if (ua.indexOf('Trident/7.0') + 1) {
+          return 11;
+        }
+        return 0;
+      })();
+      if (ieVersion) {
+        location.href = './legacy.html';
+      }
+
+      if (/iP(hone|od|ad)/.test(navigator.platform)) {
+        var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+        if (parseInt(v[1], 10) < 8) {
+          location.href = './legacyIOS.html';
+        }
+      }
+    </script>
+  
+    <!-- ... -->
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+```
+
+И сами заглушки:
+
+```html
+<!-- В @/public/legacyIE.html: -->
+<!doctype html>
+<html lang="ru" style="color: #000000;background: #ffffff;height: 100%;">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="icon" type="image/jpeg" href="./images/favicon.jpg" />
+</head>
+<body style="background: #000000;color: #ffffff;font: 13px/1.231 arial,helvetica,clean,sans-serif;*font-size: small;*font: x-small;width: 100%;margin: 0;padding: 0;height: 100%;">
+  <div style="margin: 0;padding: 0;">
+    <div id="message" style="margin: 0;padding: 0;font-size: 200%;line-height: 40px;letter-spacing: .045em;padding-top: 15%;padding-bottom: 50px;">
+        <div class="wrapperMessage" style="margin: 0;padding: 0;width: 75%;margin-left: auto;margin-right: auto;margin-bottom: 75px;padding-left: 20px;padding-right: 20px;">You have an outdated version of the browser.<br />For full work on the Internet you need to download a modern browser,<br />for example &mdash; <a href="http://www.google.com/chrome/" target="_blank" style="white-space: nowrap;color:#ff4f4f;text-decoration:underline;">Google Chrome</a>, or &mdash; <a href="https://www.mozilla.org/" target="_blank" style="white-space: nowrap;color:#ff4f4f;text-decoration:underline;">Firefox</a>.
+        </div>
+    </div>
+  </div>
+</body>
+</html>
+```
+```html
+<!-- В @/public/legacyIOS.html: -->
+<!doctype html>
+<html lang="ru" style="color: #000000;background: #ffffff;height: 100%;">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="icon" type="image/jpeg" href="./images/favicon.jpg" />
+</head>
+<body style="background: #000000;color: #ffffff;font: 13px/1.231 arial,helvetica,clean,sans-serif;*font-size: small;*font: x-small;width: 100%;margin: 0;padding: 0;height: 100%;">
+  <div style="margin: 0;padding: 0;">
+    <div id="message" style="margin: 0;padding: 0;font-size: 200%;line-height: 40px;letter-spacing: .045em;padding-top: 15%;padding-bottom: 50px;">
+        <div class="wrapperMessage" style="margin: 0;padding: 0;width: 75%;margin-left: auto;margin-right: auto;margin-bottom: 75px;padding-left: 20px;padding-right: 20px;">You have an outdated version of the OS.</div>
+    </div>
+  </div>
+</body>
+</html>
+```
+
+И теперь, для того, чтобы, предположим, в IE11 все заработало с React, вам все равно придется поключить в сорцах необходимые специальные полифилы - в самом начале - в главном модуле <code>@/src/index.js</code>:   
+
+```jsx harmony
+// В @/src/index.js:
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+// ...
+```
+
+Вот теперь все: странные пользователи зашедшие на ваш дизайн с определенных безнадежно устаревших версий IE или OS - будут надежно остановлены. Так стоит делать всегда, для любой веб-страницы которая предназначена на продакшен, для продакшена. Но давайте же уже перейдем собственно к теме раздела и рассмотрим реальный кейс в котором требуется _деградация_ сеток. 
+
+Вы заметили что в примере «заглушка» для устаревших OS закрывает их только до седьмой версии? Если вы верстали «стабильно для modern», в восьмой OS на самом деле все может быть совсем неплохо, но точно не будут работать сетки на Grid и Flexbox. В этом вы сможете убедиться, например, взглянув на свои страницы через специальные сервисы, позволяющие удаленно тестировать различные среды на нативных устройствах. Почему нас это вообще должно волновать? Если посмотреть на [статистику](http://screensiz.es/phone) - iPhone4 или iPhone6 - до сих пор занимают долю рынка по популярности. Многие эти устройства могли быть выпущенны, например, в 2013 году с OS8. Я на самом деле, не знаю какова истинная вероятность того к вам придет пользователь с настолько древним телефоном, но, теоритически, похоже, _это возможно_. Так как речь идет только о сетках мы просто можем _деградировать_ все сетки на Grid на более ранние подходы - так, чтобы они корректно отображались во всех средах.
+
+**Обычная ритмичная пространственная раскладка, ритм из ячеек из отступов - это сетка**. Для modern следует выбирать для заурядного выражения такого поведения пространства - собственно сетки, специализированную спецификацию [Grid Layout](https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout). В большинстве случаев сетки не бывают сложными и вам понадобятся самые простые конструкции из пары-тройки ячеек, например, в файле для сеток в стилевой базе препроцессора:
+```scss
+// В @/src/scss/core/_grid.scss:
+$grids__gutter: 6%;
+
+.grid {
+  display: grid;
+  gap: $grids__gutter;
+  
+  &--2 {
+    grid-template-columns: 1fr 1fr; // ритм "на два"
+
+    // Раскладываем все "в столбец" как обычно на мобильных:
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &--3 {
+    grid-template-columns: 1fr 1fr 1fr; // ритм "на три"
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+```
+
+И тогда в любом месте в шаблонах вы можете быстро кинуть, например, «адаптивную сетку на три» с помощью простой конструкции: 
+```html
+<div class="grid grid--3">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+``` 
+
+Большинство раньше и многие по-прежнему юзают такие сетки «на флоатах», я же чаще всего применял родственный, но более оригинальный-самописный подход с помощью укладывания в нужный ритм «строчных блоков»:
+
+```scss
+// В @/src/scss/core/_grid.scss:
+
+// Old rubber Grid mixin on inline-blocks for degradation
+//////////////////////////////////////////////////////
+
+// Примесь для построения простой резиновой сетки
+// из заданного числа колонок
+// с заданным резиновым отступом в процентах между ними
+// @author Левон Гамбарян
+//
+// @param {Number} $columns - количество колонок
+// @param {Percentage} $gutter - отступ в процентах
+//
+@mixin make-grid($columns, $gutter) {
+  // Вычисляем ширину колонки
+  $column-width: (100% - ($gutter * ($columns - 1))) / $columns;
+
+  > div,
+  > li {
+    display: inline-block; // сетка на строчных блоках
+    vertical-align: top;
+    min-height: 1px;
+    width: $column-width;
+
+    // На мобильных - разворачиваем сетку в столбец
+    @include xs {
+      display: block;
+      width: 100%;
+    }
+
+    // Выставляем отступ всем колонкам кроме последней
+    &:not(:nth-child(#{$columns}n)) {
+      margin-right: $gutter;
+
+      // На мобильных выставляем нулевой отступ всем колонкам
+      @include xs {
+        margin-right: 0;
+      }
+    }
+
+    // У последней колонки нет оступа
+    &:nth-child(#{$columns}n) {
+      margin-right: 0;
+    }
+
+    // Склеенные блоки
+    @for $i from 2 to $columns {
+      &.glued--#{$i} {
+        width: $column-width * $i + $gutter * ($i - 1);
+
+        @include xs {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+```
+
+В этом решении есть нетривиальный ньюанс, сложная подробность, которая состоит в том, что наличие пробелов между блоками-ячейками в HTML может _все испортить_, в общем случае, для любых систем надежнее делать вот так:
+```html
+<div class="grid grid--3">
+  <div></div
+  ><!-- Вот в этих местах - не должно быть пробелов между блоками!!! --><div></div
+  ><div></div>
+</div>
+```
+
+Но при работе с шаблонизаторами в виде современных реактивных фреймворков можно об этом и не помнить. Теперь давайте уже сделаем деградацию - тоесть так, чтобы все работало и для OS8. Для начала - научим наш лейаут отличать именно эту среду - в предыдущем разделе показано как это можно сделать с фреймворком. Мы хотим сделать совсем надежно и использовать свежую для CSS директиву <code>@supports</code> и миксин, а не плейсхолдер, поэтому:
+
+```scss
+// В @/src/scss/utils/_variables.scss:
+$ios-8: '--ios-8';
+
+// В @/src/scss/core/_grid.scss:
+// Примесь для деградации modern-сеток:
+@mixin grid__degradation() {
+  &--2 {
+    @include make-grid(2, $grids__gutter);
+  }
+
+  &--3 {
+    @include make-grid(3, $grids__gutter);
+  }
+}
+
+.grid {
+  // ...
+
+  // Проверка поддержки:
+  @supports not (display: grid) {
+    @include grid__degradation;
+  }
+
+  // Абстрактное связывание с модификатором обертки:
+  .layout#{$ios-8} & {
+    @include grid__degradation;
+  }
+}
+```
+
+Этот пока еще вполне актуальный жизненный кейс в который раз подчеркивает то, насколько мощный абстрактный препроцессор может быть лаконичен и эффективен для решеыния всевозможных нетривиальных задач постоянно возникающих перед разроботчиками в безумно быстро меняющихся средах браузеров и условиях веб-индустрии. И если «Осел» уже очень долгое время «находится на грани жизни и смерти», «в коме», и «очень многие согласны или требуют его отключить» )), то iOS доставит верстальщикам еще немало страданий и боли. Немного дальше в этом пособии будет рассмотрен случай с неожиданными проблемами и поведением как раз на самых последних моделях «айфонов».
 
 ## Резина
 
