@@ -510,7 +510,7 @@ if (document.documentElement.clientWidth < BREAKPOINT - ScreenHelper.getScrollba
 // В @/src/components/layout/Layout.jsx:
 import React, { PureComponent } from "react";
 
-class Component extends PureComponent {
+class Layout extends PureComponent {
   constructor(props) {
     super(props);
   
@@ -518,18 +518,18 @@ class Component extends PureComponent {
   };
 
   componentDidMount() {
-    // Записываем ширину скрола после монтирования:
+    // Записываем ширину скрола после монтирования лейаута:
     this.scrollbarWidth = ScreenHelper.getScrollbarWidth();
   };
 
   render() {
     return (
-      // Разметка компонента
+      // Разметка
     );
   };
 };
 
-export default Component;
+export default Layout;
 ```
 
 Теперь предположим при тестировании верстки выяснилось что есть проблемы с iOS, которые необходимо фиксить. Нам нужно научить наш фронтенд отличать iOS - давайте посмотрим как легко можно расширять функционал модуля <code>ScreenHelper</code>:
