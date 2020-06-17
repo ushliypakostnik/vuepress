@@ -1158,7 +1158,7 @@ export default utils;
 
 ```jsx harmony
 // В @/src/components/Layout/Resize.jsx:
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from 'react-redux';
 
 import ReactResizeDetector from 'react-resize-detector';
@@ -1171,7 +1171,7 @@ import ScreenHelper from '../../utils/_screen-helper';
 
 import '../../scss/components/layout/_resize.scss';
 
-class Resize extends Component {
+class Resize extends PureComponent {
   render() {
     return (
       <div className="resize">
