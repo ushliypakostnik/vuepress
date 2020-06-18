@@ -1457,7 +1457,7 @@ class Control extends PureComponent {
         className={CONTROL_CLASS}
         onClick={() => this.activateControl()}
       >
-        // ... Разметка контрола
+        <!-- ... Разметка контрола -->
       </div>
     );
   };
