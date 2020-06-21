@@ -1381,12 +1381,17 @@ $gutter: 32px;
   $component__variable--1: value;
   $component__variable--2: value;
 
+  @mixin component__mixin--1($variable) {
+    /* ... Код примеси */
+  }
+
   .component {
     /* Растворы, правила, примеси */
     @extend %placeholder;
     property-01: value;
     property-02: value;
-    @include mixin--1($component__$variable--1);
+    @include component__mixin--1($component__$variable--1);
+    @include global-mixin--1($component__variable--2, $global-variable--1);
 
     /* Дочерние селекторы */
     &__element {
@@ -1399,7 +1404,7 @@ $gutter: 32px;
     }
 
     /* Примеси с @content */
-    @include mixin--2() {
+    @include global-mixin--2() {
       @content;
     }
   }
