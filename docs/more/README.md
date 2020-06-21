@@ -1717,13 +1717,14 @@ export default ExceptionalView;
 import React, { PureComponent } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { DESIGN } from '../../store/constants';
 
 import { someAction } from '../../store/modules/module/actions';
 
 const withDeviceType = (Component) => {
-  return class extends PureComponent {
+  class WrappedComponent extends PureComponent {
     constructor(props) {
       super(props);
 
@@ -1755,6 +1756,12 @@ const withDeviceType = (Component) => {
       return <Component deviceType={deviceType} {...this.props} />;
     };
   };
+
+  WrappedComponent.propTypes = {
+    deviceType: PropTypes.string.isRequired,
+  };
+
+  return WrappedComponent;
 };
 
 // Мапим пропс в сторе
@@ -1817,8 +1824,8 @@ class SomeComponent extends PureComponent {
   };
 };
 
-PostCards.propTypes = {
-  someProp: PropTypes.array.isRequired,
+SomeComponent.propTypes = {
+  someProp: PropTypes.any.isRequired,
 };
 
 // Мапим непереиспользуемый с HOC пропс в сторе
