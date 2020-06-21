@@ -1725,15 +1725,7 @@ import { someAction } from '../../store/modules/module/actions';
 
 const withDeviceType = (Component) => {
   class WrappedComponent extends PureComponent {
-    constructor(props) {
-      super(props);
-
-      this.state = {
-        deviceType: null,
-      };
-    };
-
-    // Обновляем пропс
+    // Синхронизируем пропс со стором
     static getDerivedStateFromProps = (nextProps, prevState) => ({
       deviceType: nextProps.deviceType,
     });
@@ -1795,15 +1787,7 @@ import withDeviceType from './hoc/withDeviceType';
 // ... импорт остальных HOC
 
 class SomeComponent extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      someProp: null, // непереиспользуемый с HOC пропс нужный состоянию компонента
-    };
-  };
-
-  // Обновляем непереиспользуемый с HOC пропс
+  // Синхронизируем непереиспользуемый с HOC пропс
   static getDerivedStateFromProps = (nextProps, prevState) => ({
     someProp: nextProps.someProp,
   });
@@ -1813,8 +1797,7 @@ class SomeComponent extends PureComponent {
   };
 
   render() {
-    const { deviceType } = this.props;
-    const { someProp } = this.state;
+    const { deviceType, someProp } = this.props;
 
     return (
       <Fragment>
@@ -1830,7 +1813,7 @@ SomeComponent.propTypes = {
 
 // Мапим непереиспользуемый с HOC пропс в сторе
 const mapStateToProps = (state) => ({
-  someProp: state.rootReducer.module.someProp,
+  someProp: state.rootReducer.someModule.someProp,
 });
 
 // Композиция
