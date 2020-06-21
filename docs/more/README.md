@@ -1797,7 +1797,10 @@ class SomeComponent extends PureComponent {
   };
 
   render() {
-    const { deviceType, someProp } = this.props;
+    const {
+      deviceType,
+      someProp,
+    } = this.props;
 
     return (
       <Fragment>
