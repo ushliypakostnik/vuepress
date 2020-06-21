@@ -1656,10 +1656,11 @@ export default ScrollToTop;
 import { useEffect } from 'react';
 
 const ExceptionalHeaderView = () => {
-  const HEADER = 'header'; // Header должен нести уникальный идентификатор
+  const HEADER = 'header';
   const HEADER_ON_EXCEPTIONAL_VIEW_CLASS = `${HEADER}--on-exceptional-view`;
 
   useEffect(() => {
+    // Header должен нести уникальный идентификатор
     const header = document.getElementById(HEADER);
 
     header.classList.add(HEADER_ON_EXCEPTIONAL_VIEW_CLASS);
