@@ -252,8 +252,8 @@ $colors['primary'] = $colors.mint
 // Core base normal style and common utils
 @import "./core/_animations";
 @import "./core/_typography";
-@import "./core/_grid";
 @import "./core/_base";
+@import "./core/_grid";
 @import "./core/_utilities";
 
 
@@ -286,8 +286,8 @@ $colors['primary'] = $colors.mint
 2. Компилируемые глобальные стили:
     1. **анимации keyframes**
     2. **типографика**
-    3. **сетки**
-    4. **базовая нормализация основных HTML-элементов**
+    3. **базовая нормализация основных HTML-элементов**
+    4. **сетки**
     5. **утилитарные классы-помощники для разметки**
     
 В папки <code>@/src/scss/project</code> и <code>@/src/scss/libraries</code> вы можете добавлять файлы по необходимости.
