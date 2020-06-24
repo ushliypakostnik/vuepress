@@ -317,14 +317,14 @@ $colors['primary'] = $colors.mint
 $gutter = 20px
 
 
-// Breackpoints
+// Breakpoints
 //////////////////////////////////////////////////////
 
-$breackpoints = {
+$breakpoints = {
   tablet: 768px,
 }
 
-$breackpoints['mobile--max'] = $breackpoints.tablet - 1
+$breakpoints['mobile--max'] = $breakpoints.tablet - 1
 
 
 // В @/src/stylus/utils/mixins.styl:
@@ -337,7 +337,7 @@ $breackpoints['mobile--max'] = $breackpoints.tablet - 1
 // Breakpoints in @/src/stylus/utils/variables.styl
 
 $mobile()
-  @media only screen and (max-width $breackpoints.mobile--max)
+  @media only screen and (max-width $breakpoints.mobile--max)
     {block}
 
 
@@ -406,15 +406,15 @@ $container__desktop = 1080px;
 $container__tablet = 700px;
 
 
-// Breackpoints
+// Breakpoints
 //////////////////////////////////////////////////////
 
-$breackpoints = {
+$breakpoints = {
   tablet: 768px,
   desktop: 1240px,
 }
 
-$breackpoints['tablet--max'] = $breackpoints.desktop - 1
+$breakpoints['tablet--max'] = $breakpoints.desktop - 1
 
 
 // В @/src/stylus/utils/mixins.styl:
@@ -427,19 +427,19 @@ $breackpoints['tablet--max'] = $breackpoints.desktop - 1
 // Breakpoints in @/stylus/utils/variables.styl
 
 $desktop()
-  @media only screen and (min-width $breackpoints.desktop)
+  @media only screen and (min-width $breakpoints.desktop)
     {block}
 
 $gadgets()
-  @media only screen and (max-width $breackpoints.tablet--max)
+  @media only screen and (max-width $breakpoints.tablet--max)
     {block}
 
 $tablet()
-  @media only screen and (min-width $breackpoints.tablet) and (max-width $breackpoints.tablet--max)
+  @media only screen and (min-width $breakpoints.tablet) and (max-width $breakpoints.tablet--max)
     {block}
 
 $not-mobile()
-  @media only screen and (min-width $breackpoints.tablet)
+  @media only screen and (min-width $breakpoints.tablet)
     {block}
 
 $landscape()
