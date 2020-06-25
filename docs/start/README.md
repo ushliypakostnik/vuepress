@@ -1381,7 +1381,7 @@ $gutter: 32px;
   $component__variable--2: value;
 
   @mixin component__mixin--1($variable) {
-    /* ... Код примеси */
+    /* ... */
   }
 
   .component {
@@ -1394,17 +1394,17 @@ $gutter: 32px;
 
     /* Дочерние селекторы */
     &__element {
-      ...
+      /* ... */
     }
 
     /* Модификаторы */
     &--modifier {
-      ...
+      /* ... */
     }
 
     /* Примеси с @content */
     @include global-mixin--2() {
-      @content;
+      /* ... */
     }
   }
 </style>
