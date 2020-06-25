@@ -1364,12 +1364,12 @@ $gutter: 32px;
 
 ```vue
 <template>
-  ...
+  <!-- ... Разметка компонента -->
 </template>
 
 <script>
   export default {
-  ...
+    // ... Логика компонента
   };
 </script>
 
