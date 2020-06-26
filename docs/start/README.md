@@ -271,7 +271,7 @@ $colors['primary'] = $colors.mint
 @import "./project/_widgets";
 @import "./project/_layout";
 
-/* External libraries customization */
+// External libraries customization
 @import "./libraries/_modal";
 ```
 
