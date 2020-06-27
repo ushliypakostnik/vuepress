@@ -126,9 +126,10 @@ $icons: 20;
 └─ src
    ├─ assets
    │  └─ images
-   │     ├─ icon--1.svg
-   │     ├─ icon--2.svg
-   │     └─ ...
+   │     └─ icons 
+   │        ├─ icon--1.svg
+   │        ├─ icon--2.svg
+   │        └─ ...
    └─ sscs
       ├─ project
       │  └─ ...
