@@ -18,6 +18,10 @@ module.exports = {
         link: 'https://www.instagram.com/levongambaryan/',
       },
       {
+        text: 'Яндекс-Дзен',
+        link: 'https://zen.yandex.ru/id/5cb082914f78f300b344c61a',
+      },
+      {
         text: 'GitHub',
         link: 'https://github.com/ushliypakostnik',
       },
