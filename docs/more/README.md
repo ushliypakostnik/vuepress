@@ -1024,7 +1024,7 @@ $selector__size--mobile: 50px;
   @include text($font-family__sans, $font-size--small, $font-weight__sans__regular);
   
   // Резиновые декстопы
-  @include dekstop {
+  @include desktop {
     @include selector__rubber($rubber-pixel__width);
   }
 
@@ -1966,7 +1966,7 @@ import React, { Fragment, useEffect, useRef } from 'react';
 const Image = ({image, name, setHeight}) => {
   // Рефы на элементы
   const pictureElement = useRef(null);
-  const imageDekstopElement = useRef(null);
+  const imageDesktopElement = useRef(null);
   const imageGadgetsElement = useRef(null);
 
   useEffect(() => {
@@ -1976,7 +1976,7 @@ const Image = ({image, name, setHeight}) => {
       setTimeout(() => {
         let height;
         if (pictureElement.current) height = pictureElement.current.clientHeight;
-        if (imageDekstopElement.current && height && height !== 0) imageDekstopElement.current.style.height = `${height}px`;
+        if (imageDesktopElement.current && height && height !== 0) imageDesktopElement.current.style.height = `${height}px`;
         if (imageGadgetsElement.current && height && height !== 0) imageGadgetsElement.current.style.height = `${height}px`;
       }, 0);
     };
@@ -1998,7 +1998,7 @@ const Image = ({image, name, setHeight}) => {
     <picture ref={pictureElement}>
       ...
       <img
-        ref={imageDekstopElement}
+        ref={imageDesktopElement}
         ...
       />
       <img
