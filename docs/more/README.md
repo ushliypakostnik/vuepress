@@ -1346,7 +1346,8 @@ class Layout extends PureComponent {
   };
 
   componentDidMount() {
-    this.getRealViewportHeightUnit(); // Вызываем магию первый раз после монтирования лейаута
+    // Вызываем магию первый раз после монтирования лейаута
+    this.getRealViewportHeightUnit();
     window.addEventListener('resize', () => {this.getRealViewportHeightUnit()});
   };
 
