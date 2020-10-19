@@ -14,12 +14,16 @@ module.exports = {
         link: 'https://www.facebook.com/gambaryan',
       },
       {
-        text: 'Instagram',
+        text: 'Insta',
         link: 'https://www.instagram.com/levongambaryan/',
       },
       {
-        text: 'Яндекс-Дзен',
+        text: 'Дзен',
         link: 'https://zen.yandex.ru/id/5cb082914f78f300b344c61a',
+      },
+      {
+        text: 'LJ',
+        link: 'https://levongambaryan.livejournal.com/',
       },
       {
         text: 'GitHub',
@@ -30,7 +34,11 @@ module.exports = {
         link: 'https://spb.hh.ru/resume/7c1eac71ff010d7c4d0039ed1f6843664c5172',
       },
       {
-        text: 'ХабрКарьера',
+        text: 'Хабр',
+        link: 'https://habr.com/ru/users/ushliypakostnik',
+      },
+      {
+        text: 'ХабрК',
         link: 'https://career.habr.com/levon-gambaryan',
       },
       {
