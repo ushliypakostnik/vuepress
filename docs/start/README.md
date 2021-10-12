@@ -465,10 +465,10 @@ $portrait()
   @extends $container // раствор создан выше
   margin 0 auto // по центру
 
-  +lg()
+  +$desktop()
     max-width $container__desktop
 
-  +sm()
+  +tablet()
     max-width $container__tablet
 ```
 

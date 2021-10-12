@@ -3,6 +3,7 @@ module.exports = {
   description: 'Как верстать веб-интерфейсы быстро, качественно и интересно',
   base: '/',
   sidebarDepth: 5,
+  plugins: ['@vuepress/active-header-links'],
   themeConfig: {
     nav: [
       {
